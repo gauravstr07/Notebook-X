@@ -1,15 +1,10 @@
-import React, {useContext, useEffect} from 'react'
-import noteContext from '../context/notes/NoteContext'
+import React from 'react'
+
 
 const About = () => {
-  const a = useContext(noteContext)
-  useEffect(() => {
-    a.update();
-    // eslint-disable-next-line
-  }, [])
   return (
     <div>
-      <h3>My name is {a.state.name} contact me on {a.state.email}</h3>
+      <h3>About</h3>
     </div>
   )
 }
