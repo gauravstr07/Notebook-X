@@ -22,61 +22,64 @@ const NoteState = (props) => {
       __v: 0,
     },
     {
-        _id: "6348641c0c16fd4895a890e783",
-        user: "6348250fc28d53d418de3ec5",
-        title: "My Family",
-        description: "I Love My Family",
-        tag: "#everythingwillbeOkey🤗",
-        date: "2022-10-13T19:16:44.076Z",
-        __v: 0,
-      },
-      {
-        _id: "6348641c0c16fd45a890e21783",
-        user: "6348250fc28d53d418de3ec5",
-        title: "My Family",
-        description: "I Love My Family",
-        tag: "#everythingwillbeOkey🤗",
-        date: "2022-10-13T19:16:44.076Z",
-        __v: 0,
-      },
-      {
-        _id: "6348641c0c16fd4905a890e783",
-        user: "6348250fc28d53d418de3ec5",
-        title: "My Family",
-        description: "I Love My Family",
-        tag: "#everythingwillbeOkey🤗",
-        date: "2022-10-13T19:16:44.076Z",
-        __v: 0,
-      },
+      _id: "6348641c0c16fd4895a890e783",
+      user: "6348250fc28d53d418de3ec5",
+      title: "My Family",
+      description: "I Love My Family",
+      tag: "#everythingwillbeOkey🤗",
+      date: "2022-10-13T19:16:44.076Z",
+      __v: 0,
+    },
+    {
+      _id: "6348641c0c16fd45a890e21783",
+      user: "6348250fc28d53d418de3ec5",
+      title: "My Family",
+      description: "I Love My Family",
+      tag: "#everythingwillbeOkey🤗",
+      date: "2022-10-13T19:16:44.076Z",
+      __v: 0,
+    },
+    {
+      _id: "6348641c0c16fd4905a890e783",
+      user: "6348250fc28d53d418de3ec5",
+      title: "My Family",
+      description: "I Love My Family",
+      tag: "#everythingwillbeOkey🤗",
+      date: "2022-10-13T19:16:44.076Z",
+      __v: 0,
+    },
   ];
 
   let [notes, setNotes] = useState(notesInitial);
 
   // Add a Note
   let addNote = (title, description, tag) => {
-    console.log('Adding a new Note')
-   let note = {
-     " _id": "6348641c0c16fd45a211890e783",
-      "user": "6348250fc28d53d418de3ec5",
-      "title": title,
-      "description": description,
-      "tag": tag,
-      "date": "2022-10-13T19:16:44.076Z",
-      "__v": 0,
+    console.log("Adding a new Note");
+    let note = {
+      " _id": "6348641c0c16fd45a211890e783",
+      user: "6348250fc28d53d418de3ec5",
+      title: title,
+      description: description,
+      tag: tag,
+      date: "2022-10-13T19:16:44.076Z",
+      __v: 0,
     };
     setNotes(notes.concat(note));
-  }
-
+  };
 
   // Delete a Note
   const deleteNote = (id) => {
-    
-  }
+    console.log("Note Deleted " + id);
+    const newNotes = notes.filter((note) => {
+     return note._id !== id;
+    });
+    setNotes(newNotes);
+  };
 
   //Edit a Note
-  const editNote = () => {
+  const editNote = (id, title, description, tag) => {
 
-  }
+  };
 
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
