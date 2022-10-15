@@ -3,7 +3,7 @@ import noteContext from "../context/notes/NoteContext";
 import AddNote from "./AddNote";
 import Noteitem from "./Noteitem";
 
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
   useEffect(() => {
@@ -39,11 +39,12 @@ const Notes = () => {
     console.log("Updating Note", note);
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
+    props.showAlert("Update Successfully", "success");
   };
 
   return (
     <>
-      <AddNote />
+      <AddNote showAlert={props.showAlert} />
 
       <button
         type="button"
@@ -134,7 +135,9 @@ const Notes = () => {
                 Close
               </button>
               <button
-                disabled={note.etitle.length < 3 || note.edescription.length < 5}
+                disabled={
+                  note.etitle.length < 3 || note.edescription.length < 5
+                }
                 onClick={handleClick}
                 type="button"
                 className="btn btn-primary"
@@ -152,7 +155,12 @@ const Notes = () => {
         )}
         {notes.map((note) => {
           return (
-            <Noteitem key={note._id} updateNote={updateNote} note={note} />
+            <Noteitem
+              key={note._id}
+              updateNote={updateNote}
+              showAlert={props.showAlert}
+              note={note}
+            />
           );
         })}
       </div>
