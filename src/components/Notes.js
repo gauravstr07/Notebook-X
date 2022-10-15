@@ -5,14 +5,17 @@ import Noteitem from "./Noteitem";
 
 const Notes = () => {
   const context = useContext(noteContext);
-  const { notes, getNotes } = context;
+  const { notes, getNotes, editNote } = context;
   useEffect(() => {
     getNotes();
     // eslint-disable-next-line
   }, []);
 
   const ref = useRef(null);
+  const refClose = useRef(null);
+
   const [note, setNote] = useState({
+    id:"",
     etitle: "",
     edescription: "",
     etag: "",
@@ -21,6 +24,7 @@ const Notes = () => {
   const updateNote = (currentNote) => {
     ref.current.click();
     setNote({
+        id: currentNote._id,
       etitle: currentNote.title,
       edescription: currentNote.description,
       etag: currentNote.tag,
@@ -33,7 +37,8 @@ const Notes = () => {
 
   const handleClick = (e) => {
     console.log("Updating Note", note)
-    e.preventDefault();
+    editNote(note.id, note.etitle, note.edescription, note.etag)
+    refClose.current.click();
   };
 
   return (
@@ -73,7 +78,7 @@ const Notes = () => {
             <div className="modal-body">
               <form className="my-3">
                 <div className="mb-3">
-                  <label htmlFor="etitle" className="form-label">
+                  <label htmlFor="title" className="form-label">
                     Title
                   </label>
                   <input
@@ -87,7 +92,7 @@ const Notes = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="edescription" className="form-label">
+                  <label htmlFor="description" className="form-label">
                     Description
                   </label>
                   <input
@@ -101,7 +106,7 @@ const Notes = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="etag" className="form-label">
+                  <label htmlFor="tag" className="form-label">
                     Tag
                   </label>
                   <input
@@ -117,6 +122,7 @@ const Notes = () => {
             </div>
             <div className="modal-footer">
               <button
+              ref={refClose}
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
